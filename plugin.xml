@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="com.gameflierHao.cordova.iiiBeacon"
+      version="0.0.1">
+	<name>Device</name>
+	<description>Cordova iiiBeacone Plugin</description>
+	<keywords>cordova,device</keywords>
+
+    <js-module src="www/cdv-plugin-iiibeacon.js" name="iiiBeacon">
+        <clobbers target="window.iiiBeacon" />
+    </js-module>
+	
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="iiiBeacon">
+                <param name="android-package" value="org.apache.cordova.core.iiiBeacon" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+          <service
+			  android:name="tw.org.iii.beaconcontentsdk.BeaconContentService"
+			  android:enabled="true"
+			  android:exported="true" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.BLUETOOTH" />
+			<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />  
+        </config-file>
+
+		<source-file src="src/android/iiibeacons/beaconcontentsdk_v2.4.1.jar" target-dir="libs" framework="true" />
+        <source-file src="src/android/iiiBeacon.java" target-dir="src/org/apache/cordova/core" />  
+		<source-file src="src/android/ExceptionString.java" target-dir="src/org/apache/cordova/core" />  
+		<source-file src="src/android/myMainActivity.java" target-dir="src/org/apache/cordova/core" />	
+     </platform>
+          
+</plugin>
